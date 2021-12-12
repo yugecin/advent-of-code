@@ -9,6 +9,8 @@ CALL :RUN day02a.asm %1 || GOTO:ERR
 CALL :RUN day02b.asm %1 || GOTO:ERR
 CALL :RUN day03a.asm %1 || GOTO:ERR
 CALL :RUN day03b.asm %1 || GOTO:ERR
+CALL :RUN day04a.asm %1 || GOTO:ERR
+CALL :RUN day04b.asm %1 || GOTO:ERR
 GOTO:EOF
 
 :RUN
