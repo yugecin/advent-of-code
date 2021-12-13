@@ -46,6 +46,7 @@ aoc:
 	mov esi, eax
 	xor eax, 111111111111b
 	mul esi
+	xor edx, edx ; 64bit return value
 
 	pop edi
 	pop ebx

@@ -86,6 +86,7 @@ aoc:
 	inc esi
 	loop @@count
 
+	xor edx, edx ; 64bit return value
 	pop edi
 	pop ebx
 	pop esi

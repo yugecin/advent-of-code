@@ -54,6 +54,8 @@ aoc:
 
 	add esp, 0Ch ; counter the sub done at the start for args
 	mov eax, dword [result]
+	xor edx, edx ; 64bit return value
+
 	pop edi
 	pop ebx
 	pop esi

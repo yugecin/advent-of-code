@@ -7,7 +7,7 @@ namespace aoc2021
 	class Aoc2021
 	{
 		[DllImport("aoc.dll")]
-		public static extern int aoc();
+		public static extern long aoc();
 		[DllImport("kernel32.dll", CallingConvention = CallingConvention.StdCall)]
 		public static extern int LoadLibraryA(string lpLibFileName);
 
@@ -28,7 +28,7 @@ namespace aoc2021
 			// see https://docs.microsoft.com/en-us/dotnet/api/system.diagnostics.stopwatch
 			long nanosPerTick = (1000L * 1000L * 1000L) / Stopwatch.Frequency;
 			long min = long.MaxValue, max = long.MinValue, total = 0;
-			int res = aoc();
+			long res = aoc();
 			if (debug) {
 				return;
 			}
@@ -37,7 +37,7 @@ namespace aoc2021
 			Stopwatch sw = new Stopwatch();
 			for (int i = 0; i < iterations; i++) {
 				sw.Start();
-				int newres = aoc();
+				long newres = aoc();
 				sw.Stop();
 				min = Math.Min(min, sw.ElapsedTicks);
 				max = Math.Max(max, sw.ElapsedTicks);
@@ -52,19 +52,19 @@ namespace aoc2021
 				}
 				res = newres;
 			}
+			float totalTicks = total / (float) iterations;
+			float totalNs = totalTicks * nanosPerTick;
 			if (!bench) {
 				Console.WriteLine(
 					"{0} {1:F0}ticks/{2:F0}ns timer resolution {3}ns",
-					res,
-					total / 500f, total / 500f * nanosPerTick,
-					nanosPerTick
+					res, totalTicks, totalNs, nanosPerTick
 				);
 				return;
 			}
 			Console.WriteLine(
 				"{0} avg {1:F0}ticks/{2:F0}ns lo {3}/{4}ns hi {5}/{6}ns timer resolution {7}ns",
 				res,
-				total / 500f, total / 500f * nanosPerTick,
+				totalTicks, totalNs,
 				min, min * nanosPerTick,
 				max, max * nanosPerTick,
 				nanosPerTick

@@ -60,6 +60,7 @@ aoc:
 	add eax, dword [values+018h]
 	add eax, dword [values+01Ch]
 	add eax, dword [values+020h]
+	xor edx, edx ; 64bit return value
 
 	pop edi
 	pop ebx

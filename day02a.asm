@@ -30,6 +30,7 @@ aoc:
 	mov ecx, dword [values+075h*4] ; up
 	sub eax, ecx
 	mul dword [values+066h*4] ; forwards
+	xor edx, edx ; 64bit return value
 
 	pop ebx
 	pop esi

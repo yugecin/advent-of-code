@@ -119,12 +119,14 @@ check_board_for_drawn_number:
 	mov dword [result], eax
 
 	; exit by resetting the stack and popping saved registers
-	; this immediately returns to the caller of "aoc"
+	; this skips returning to the caller of "check_board_for_drawn_number"
+	; and instead immediately returns to the caller of "aoc"
 	; this is horrible, I love it
 @@exit:
 	mov esp, dword [retstack]
 	popad
 	mov eax, dword [result]
+	xor edx, edx ; 64bit return value
 	ret
 
 section .bss

@@ -42,6 +42,7 @@ aoc:
 @@end:
 	mov eax, dword [values+072h*4] ; depth(summed)
 	mul dword [values+071h*4] ; forwards(summed)
+	xor edx, edx ; 64bit return value
 
 	pop ebx
 	pop esi

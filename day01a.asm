@@ -10,6 +10,7 @@ global aoc
 aoc:
 	push esi
 	push ebx
+
 	xor eax, eax
 	xor ecx, ecx
 	mov ebx, [input]
@@ -23,6 +24,8 @@ aoc:
 	add edx, 4
 	cmp edx, end
 	jl @@next
+
+	xor edx, edx ; 64bit return value
 	pop ebx
 	pop esi
 	ret

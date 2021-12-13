@@ -66,6 +66,7 @@ aoc:
 	mov dword [esp], 1 ; 1="CO2 scrubber rating"
 	call @@calc
 	mul dword [oxygen_gen_rating]
+	xor edx, edx ; 64bit return value
 	add esp, 4 ; pop the arg for calling @@cal
 
 	pop edi
