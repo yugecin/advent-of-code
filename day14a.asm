@@ -98,13 +98,6 @@ aoc:
 	mov ecx, ebx
 	loop @@nextstep
 
-	; count result
-	mov ecx, 05A5Ah-04141h
-	xor eax, eax
-@@countnext_:
-	add eax, dword [esi+ecx*4-4]
-	loop @@countnext_
-
 	; count result (values we want are now in esi)
 	; since the keys of the values are pairs, use the latter letter
 	mov ecx, 05A5Ah-04141h
