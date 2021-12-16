@@ -12,13 +12,12 @@ aoc:
 	push ebx
 	push edi
 
-	xor edi, edi ; sum of version numbers
 	xor esi, esi ; next bit idx to read
 
 	call pop_packet
 
-	mov eax, edi
-	xor edx, edx ; 64bit return value
+	xor eax, eax
+	xchg eax, edx
 
 	pop edi
 	pop ebx
@@ -26,14 +25,13 @@ aoc:
 	retn
 
 ; recursive shizzle
-; returns number of bits read
+; returns number of bits read in eax, result of expression in edx
 pop_packet:
 	xor ecx, ecx
 	; packet version
 	xor ebx, ebx
 	mov ch, 3
 	call shift_next_ch_bits_into_ebx
-	add edi, ebx
 	; type
 	xor bl, bl
 	mov ch, 3
@@ -41,6 +39,7 @@ pop_packet:
 	cmp bl, 4
 	jne @@operator_packet
 	; type 4 packet: number
+	xor edx, edx ; result of expression
 	push 3+3 ; bit size of this packet
 @@read_next_number_part:
 	add dword [esp], 5 ; bit size of this packet
@@ -50,13 +49,16 @@ pop_packet:
 	push ebx ; first bit indicating whether this is the last(0) or not(1)
 	mov ch, 4
 	call shift_next_ch_bits_into_ebx
+	shl edx, 4 ; result of expression
+	or dl, bl ; result of expression
 	pop eax ; first bit indicating whether this is the last(0) or not(1)
 	test al, al
 	jnz @@read_next_number_part
-	pop eax ; number of bits that makes the number
+	pop eax ; bit size of this packet
 	retn
 @@operator_packet:
 	; operator packet
+	push ebx ; the operator
 	; read mode
 	xor ebx, ebx
 	mov ch, 1
@@ -67,35 +69,100 @@ pop_packet:
 	xor ebx, ebx
 	mov ch, 15
 	call shift_next_ch_bits_into_ebx
-	push ebx ; total length that will be read
+	lea eax, [ebx+15+1+3+3]
+	push eax ; total length of this packet
+	push 0 ; number of read subpackets
 @@length_not_zero:
 	push ebx ; total length left
 	call pop_packet
 	pop ebx ; total length left
+	pop ecx ; number of read subpackets
+	push edx ; value of the popped packet
+	inc ecx
+	push ecx ; number of read subpackets
 	sub ebx, eax ; sub return value of pop_packet
 	jnz @@length_not_zero
-	pop eax ; total length that will be read
-	add eax, 15+1+3+3
-	retn
+	jmp @@operator_packet_do_operation_and_return
 @@op_with_num_packets:
 	; operator packet read mode = number of subpackets
 	xor ebx, ebx
 	mov ch, 11
 	call shift_next_ch_bits_into_ebx
 	push 11+1+3+3 ; bit size of this packet
-	push ebx ; number of subpackets left
+	mov ecx, ebx ; number of subpackets left
+	push 0 ; number of read subpackets
 @@op_read_next_subpacket:
-	pop ecx ; number of subpackets left
 	test ecx, ecx
-	jz @@no_subpackets_left
+	jz @@operator_packet_do_operation_and_return
 	dec ecx
 	push ecx ; number of subpackets left
 	call pop_packet
-	add dword [esp+4], eax ; total length
+	pop ecx ; number of subpackets left
+	pop ebx ; number of read subpackets
+	push edx ; value of the popped packet
+	inc ebx
+	push ebx ; number of read subpackets
+	add dword [esp+ebx*4+4], eax ; bit size of this packet
 	jmp @@op_read_next_subpacket
-@@no_subpackets_left:
+@@operator_packet_do_operation_and_return:
+	; now top of the stack is amount of numbers, and following that are
+	; those numbers, then and the bit size of all this, then the operator
+	pop ecx
+	mov edi, dword [esp+ecx*4+4] ; the operator
+	pop edx
+	dec ecx ; because the first value is already in edx
+	jmp dword [opjmptable+edi*4]
+@@sum:
+	dec ecx
+	js @@endop
+	pop ebx
+	add edx, ebx
+	jmp @@sum
+@@product:
+	dec ecx
+	js @@endop
+	pop ebx
+	imul edx, ebx
+	jmp @@product
+@@min:
+	dec ecx
+	js @@endop
+	pop ebx
+	cmp ebx, edx
+	cmovb edx, ebx
+	jmp @@min
+@@max:
+	dec ecx
+	js @@endop
+	pop ebx
+	cmp ebx, edx
+	cmovae edx, ebx
+	jmp @@max
+@@ge:
+	pop ebx
+	cmp ebx, edx
+	setg dl
+	and edx, 1
+	jmp @@endop
+@@le:
+	pop ebx
+	cmp ebx, edx
+	setl dl
+	and edx, 1
+	jmp @@endop
+@@eq:
+	pop ebx
+	cmp edx, ebx
+	sete dl
+	and edx, 1
+@@endop:
 	pop eax ; bit size of this packet
-	retn
+	add esp, 4 ; the operator was here
+	ret
+@@crash: ; type 4 is a number packet
+	int 3
+opjmptable:
+	dd @@sum, @@product, @@min, @@max, @@crash, @@ge, @@le, @@eq
 
 shift_next_ch_bits_into_ebx:
 	push edx
