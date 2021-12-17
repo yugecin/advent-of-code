@@ -16,8 +16,8 @@ aoc:
 
 	call pop_packet
 
-	xor eax, eax
-	xchg eax, edx
+	mov eax, edx
+	mov edx, edi
 
 	pop edi
 	pop ebx
@@ -25,7 +25,7 @@ aoc:
 	retn
 
 ; recursive shizzle
-; returns number of bits read in eax, result of expression in edx
+; returns number of bits read in eax, result of expression in edi:edx(hi32:lo32)
 pop_packet:
 	xor ecx, ecx
 	; packet version
@@ -39,7 +39,8 @@ pop_packet:
 	cmp bl, 4
 	jne @@operator_packet
 	; type 4 packet: number
-	xor edx, edx ; result of expression
+	xor edx, edx ; result of expression (lo32)
+	xor edi, edi ; result of expression (hi32)
 	push 3+3 ; bit size of this packet
 @@read_next_number_part:
 	add dword [esp], 5 ; bit size of this packet
@@ -47,10 +48,16 @@ pop_packet:
 	mov ch, 1
 	call shift_next_ch_bits_into_ebx
 	push ebx ; first bit indicating whether this is the last(0) or not(1)
+	xor ebx, ebx
 	mov ch, 4
 	call shift_next_ch_bits_into_ebx
-	shl edx, 4 ; result of expression
-	or dl, bl ; result of expression
+	mov eax, edx
+	shr eax, 28
+	and eax, 0Fh
+	shl edi, 4 ; result of expression (hi32)
+	or edi, eax ; result of expression (hi32)
+	shl edx, 4 ; result of expression (lo32)
+	or dl, bl ; result of expression (lo32)
 	pop eax ; first bit indicating whether this is the last(0) or not(1)
 	test al, al
 	jnz @@read_next_number_part
@@ -77,7 +84,8 @@ pop_packet:
 	call pop_packet
 	pop ebx ; total length left
 	pop ecx ; number of read subpackets
-	push edx ; value of the popped packet
+	push edx ; value of the popped packet (lo32)
+	push edi ; value of the popped packet (hi32)
 	inc ecx
 	push ecx ; number of read subpackets
 	sub ebx, eax ; sub return value of pop_packet
@@ -99,62 +107,154 @@ pop_packet:
 	call pop_packet
 	pop ecx ; number of subpackets left
 	pop ebx ; number of read subpackets
-	push edx ; value of the popped packet
+	push edx ; value of the popped packet (lo32)
+	push edi ; value of the popped packet (hi32)
 	inc ebx
 	push ebx ; number of read subpackets
-	add dword [esp+ebx*4+4], eax ; bit size of this packet
+	add dword [esp+ebx*8+4], eax ; bit size of this packet
 	jmp @@op_read_next_subpacket
 @@operator_packet_do_operation_and_return:
 	; now top of the stack is amount of numbers, and following that are
-	; those numbers, then and the bit size of all this, then the operator
+	; those numbers (first hi32 then lo32), then and the bit size of all
+	; this, then the operator
 	pop ecx
-	mov edi, dword [esp+ecx*4+4] ; the operator
-	pop edx
+	mov eax, dword [esp+ecx*8+4] ; the operator
+	pop edi ; result (hi32)
+	pop edx ; result (lo32)
 	dec ecx ; because the first value is already in edx
-	jmp dword [opjmptable+edi*4]
+	jmp dword [opjmptable+eax*4]
 @@sum:
 	dec ecx
 	js @@endop
-	pop ebx
+	pop eax ; (hi32)
+	pop ebx ; (lo32)
 	add edx, ebx
+	adc edi, eax
 	jmp @@sum
 @@product:
 	dec ecx
 	js @@endop
+	pop eax ; (hi32)
+	pop ebx ; (lo32)
+	push ecx
+	; AAAAAAAAAAAAAAAAAAAAARGH
+	test eax, eax
+	setz cl
+	test ebx, ebx
+	setz ch
+	cmp cx, 0101h
+	je @@product_zero
+	test edx, edx
+	setz cl
+	test edi, edi
+	setz ch
+	cmp cx, 0101h
+	je @@product_zero
+	; BBBBBBBBBBBBBBBBBBBBBBBBB
+	; mov lowest to eax:ebx for speed
+	cmp edi, eax
+	jb @@productswap
+	ja @@productnoswap
+	cmp edx, ebx
+	jae @@productnoswap
+@@productswap:
+	push edi
+	push edx
+	mov edi, eax
+	mov edx, ebx
 	pop ebx
-	imul edx, ebx
-	jmp @@product
+	pop eax
+@@productnoswap:
+	push edx ; (lo32)
+	push edi ; (hi32)
+	jmp @@product_firstround
+@@product_continue:
+	add edx, dword [esp+4]
+	adc edi, dword [esp]
+@@product_firstround:
+	sub ebx, 1
+	sbb eax, 0
+	test eax, eax
+	setz cl
+	test ebx, ebx
+	setz ch
+	cmp cx, 0101h
+	jne @@product_continue
+	add esp, 8 ; because the push above @@product_continue
+	pop ecx
+	jmp @@product ; next number
+@@product_zero:
+	pop ecx
+	xor edx, edx ; result (lo32)
+	xor edi, edi ; result (hi32)
+@@product_zero_popnums:
+	dec ecx
+	js @@endop
+	add esp, 8
+	jmp @@product_zero_popnums
 @@min:
 	dec ecx
 	js @@endop
-	pop ebx
-	cmp ebx, edx
-	cmovb edx, ebx
+	pop eax ; (hi32)
+	pop ebx ; (lo32)
+	cmp eax, edi ; (hi32)
+	ja @@min
+	jb @@min_yes
+	cmp ebx, edx ; (lo32)
+	jae @@min
+@@min_yes:
+	mov edi, eax ; (hi32)
+	mov edx, ebx ; (lo32)
 	jmp @@min
 @@max:
 	dec ecx
 	js @@endop
-	pop ebx
-	cmp ebx, edx
-	cmovae edx, ebx
+	pop eax ; (hi32)
+	pop ebx ; (lo32)
+	cmp eax, edi ; (hi32)
+	jb @@max
+	ja @@max_yes
+	cmp ebx, edx ; (lo32)
+	jbe @@max
+@@max_yes:
+	mov edi, eax ; (hi32)
+	mov edx, ebx ; (lo32)
 	jmp @@max
-@@ge:
-	pop ebx
-	cmp ebx, edx
-	setg dl
-	and edx, 1
+@@gt:
+	pop eax ; (hi32)
+	pop ebx ; (lo32)
+	cmp eax, edi ; (hi32)
+	ja @@gtlt_yes
+	jb @@gtlt_no
+	cmp ebx, edx ; (lo32)
+	ja @@gtlt_yes
+@@gtlt_no:
+	xor edi, edi ; result (hi32)
+	mov edx, 0 ; result (hi32)
 	jmp @@endop
-@@le:
-	pop ebx
-	cmp ebx, edx
-	setl dl
-	and edx, 1
+@@gtlt_yes:
+	xor edi, edi ; result (hi32)
+	mov edx, 1 ; result (hi32)
 	jmp @@endop
+@@lt:
+	pop eax ; (hi32)
+	pop ebx ; (lo32)
+	cmp eax, edi ; (hi32)
+	jb @@gtlt_yes
+	ja @@gtlt_no
+	cmp ebx, edx ; (lo32)
+	jb @@gtlt_yes
+	jmp @@gtlt_no
 @@eq:
-	pop ebx
-	cmp edx, ebx
-	sete dl
-	and edx, 1
+	pop eax ; (hi32)
+	pop ebx ; (lo32)
+	cmp eax, edi ; (hi32)
+	sete cl
+	cmp ebx, edx ; (lo32)
+	sete ch
+	and cl, ch
+	movzx edx, cl ; (lo32)
+	xor edi, edi ; (hi32)
 @@endop:
 	pop eax ; bit size of this packet
 	add esp, 4 ; the operator was here
@@ -162,7 +262,7 @@ pop_packet:
 @@crash: ; type 4 is a number packet
 	int 3
 opjmptable:
-	dd @@sum, @@product, @@min, @@max, @@crash, @@ge, @@le, @@eq
+	dd @@sum, @@product, @@min, @@max, @@crash, @@gt, @@lt, @@eq
 
 shift_next_ch_bits_into_ebx:
 	push edx
