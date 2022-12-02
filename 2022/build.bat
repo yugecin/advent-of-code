@@ -11,7 +11,9 @@ REM my vcvars returns errorlevel 9009 (attempted to execute a non-existing comma
 CALL :RUN day01a.asm %1 || GOTO:ERR
 CALL :RUN day01b.asm %1 || GOTO:ERR
 CALL :RUN day02a.asm %1 || GOTO:ERR
+CALL :RUN day02a-faster.asm %1 || GOTO:ERR
 CALL :RUN day02b.asm %1 || GOTO:ERR
+CALL :RUN day02b-faster.asm %1 || GOTO:ERR
 GOTO:EOF
 
 :RUN

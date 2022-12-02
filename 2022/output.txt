@@ -7,6 +7,12 @@
 ======= day02a.asm
    Creating library ../aoc.lib and object ../aoc.exp
 12679 avg 38ticks/3827ns lo 38/3800ns hi 79/7900ns timer resolution 100ns
+======= day02a-faster.asm
+   Creating library ../aoc.lib and object ../aoc.exp
+12679 17ticks/1700ns timer resolution 100ns
 ======= day02b.asm
    Creating library ../aoc.lib and object ../aoc.exp
 14470 avg 38ticks/3847ns lo 38/3800ns hi 85/8500ns timer resolution 100ns
+======= day02b-faster.asm
+   Creating library ../aoc.lib and object ../aoc.exp
+14470 17ticks/1700ns timer resolution 100ns
