@@ -4,3 +4,9 @@
 ======= day01b.asm
    Creating library ../aoc.lib and object ../aoc.exp
 211189 avg 7ticks/724ns lo 7/700ns hi 23/2300ns timer resolution 100ns
+======= day02a.asm
+   Creating library ../aoc.lib and object ../aoc.exp
+12679 avg 38ticks/3827ns lo 38/3800ns hi 79/7900ns timer resolution 100ns
+======= day02b.asm
+   Creating library ../aoc.lib and object ../aoc.exp
+14470 avg 38ticks/3847ns lo 38/3800ns hi 85/8500ns timer resolution 100ns
