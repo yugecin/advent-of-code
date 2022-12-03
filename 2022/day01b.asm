@@ -31,14 +31,10 @@ aoc:
 	mov ebx, ecx
 	cmp ebx, edx
 	jl @lower
-	mov ecx, ebx
-	mov ebx, edx
-	mov edx, ecx
+	xchg ebx, edx
 	cmp edx, ebp
 	jl @lower
-	mov ecx, edx
-	mov edx, ebp
-	mov ebp, ecx
+	xchg ebp, edx
 @lower:
 	xor ecx, ecx
 	mov esi, [input+eax*4]
