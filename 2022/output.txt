@@ -16,3 +16,6 @@
 ======= day02b-faster.asm
    Creating library ../aoc.lib and object ../aoc.exp
 14470 17ticks/1700ns timer resolution 100ns
+======= day03a.asm
+   Creating library ../aoc.lib and object ../aoc.exp
+7746 149ticks/14900ns timer resolution 100ns
