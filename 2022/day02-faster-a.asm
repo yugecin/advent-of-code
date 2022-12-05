@@ -29,9 +29,9 @@ aoc:
 section .data
 	score \
 		db 0x5841 dup(0)
-		db 3, 1, 2
+		db 4, 1, 7
 		db 0xFD dup(0)
-		db 4, 5, 6
+		db 8, 5, 2
 		db 0xFD dup(0)
-		db 8, 9, 7
-%include "day02input-faster.asm"
+		db 3, 9, 6
+%include "day02-faster-input.asm"

@@ -8,13 +8,13 @@ Setting environment for using Microsoft Visual Studio 2005 x86 tools.
 ======= day02a.asm
    Creating library ../aoc.lib and object ../aoc.exp
 12679 avg 38ticks/3827ns lo 38/3800ns hi 79/7900ns timer resolution 100ns
-======= day02a-faster.asm
-   Creating library ../aoc.lib and object ../aoc.exp
-12679 17ticks/1700ns timer resolution 100ns
 ======= day02b.asm
    Creating library ../aoc.lib and object ../aoc.exp
 14470 avg 38ticks/3847ns lo 38/3800ns hi 85/8500ns timer resolution 100ns
-======= day02b-faster.asm
+======= day02-faster-a.asm
+   Creating library ../aoc.lib and object ../aoc.exp
+12679 17ticks/1700ns timer resolution 100ns
+======= day02-faster-b.asm
    Creating library ../aoc.lib and object ../aoc.exp
 14470 avg 11ticks/1054ns lo 5/500ns hi 55/5500ns timer resolution 100ns
 ======= day03a.asm
