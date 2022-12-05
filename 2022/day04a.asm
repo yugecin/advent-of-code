@@ -5,7 +5,6 @@ global aoc
 aoc:
 	push esi
 	push edi
-	xor edx, edx
 	xor edi, edi
 	mov esi, input
 @next:
@@ -14,22 +13,17 @@ aoc:
 	jz @end
 	mov cx, ax
 	shr eax, 16
-	cmp ax, cx
-	jg @ok
-	xchg ax, cx
-@ok:
-	cmp ah, ch
-	jne @okk
 	cmp al, cl
-	jl @okk
-	xchg ax, cx
-@okk:
-	cmp cl, al
-	setge ah
-	cmp ch, al
 	setge dl
-	and dl, ah
-	add edi, edx
+	setle dh
+	cmp ah, ch
+	setle al
+	setge ah
+	and al, dl
+	and ah, dh
+	or al, ah
+	and eax, 1
+	add edi, eax
 	lea esi, [esi+4]
 	jmp @next
 
