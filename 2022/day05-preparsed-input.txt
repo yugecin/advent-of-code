@@ -1,5 +1,9 @@
 section .data
-	stacksize db \
+	stacksize db 9 dup(64 dup(0))
+	stackdata db 9 dup(64 dup(0))
+	msg db 64 dup(0)
+section .rodata
+	_stacksize db \
 		6, 63 dup(0), \
 		7, 63 dup(0), \
 		8, 63 dup(0), \
@@ -9,7 +13,7 @@ section .data
 		7, 63 dup(0), \
 		4, 63 dup(0), \
 		5, 63 dup(0)
-	stackdata db \
+	_stackdata db \
 		"TDWZVP", 58 dup(0), \
 		"LSWVFJD", 57 dup(0), \
 		"ZMLSVTBH", 56 dup(0), \
@@ -19,8 +23,6 @@ section .data
 		"VJPCBDN", 57 dup(0), \
 		"PTBQ", 60 dup(0), \
 		"HGZRC", 59 dup(0)
-	msg db 64 dup(0)
-section .rodata
 	rules db \
 		3, 2, 9, 0,\
 		1, 1, 6, 0,\

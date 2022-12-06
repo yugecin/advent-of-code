@@ -8,6 +8,11 @@ aoc:
 	push esi
 	push ebx
 
+	mov edi, stacksize
+	mov esi, _stacksize
+	mov ecx, 9*2*64/4
+	rep movsd
+
 	mov eax, rules
 	xor edx, edx
 @nextrule:
