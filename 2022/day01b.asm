@@ -10,7 +10,6 @@ global aoc
 aoc:
 	push esi
 	push ebx
-	push edx
 	push ebp
 
 	xor ecx, ecx
@@ -48,7 +47,6 @@ end:
 	add eax, ebp
 	xor edx, edx ; 64bit return value
 	pop ebp
-	pop edx
 	pop ebx
 	pop esi
 	ret
