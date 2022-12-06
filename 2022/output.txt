@@ -47,3 +47,6 @@ Creating library ../aoc.lib and object ../aoc.exp
 ======= day06a.asm
    Creating library ../aoc.lib and object ../aoc.exp
 1109 avg 8ticks/791ns lo 7/700ns hi 29/2900ns timer resolution 100ns
+======= day06b.asm
+   Creating library ../aoc.lib and object ../aoc.exp
+3965 avg 29ticks/2931ns lo 28/2800ns hi 92/9200ns timer resolution 100ns
