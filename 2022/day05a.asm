@@ -8,6 +8,11 @@ aoc:
 	push esi
 	push ebx
 
+	xor eax, eax
+	mov edi, stacksize
+	mov ecx, NUMSTACKS*2*64/4
+	rep stosd
+
 	; put initialstack into stackdata
 	mov esi, initialstack+1
 @continueparse:
