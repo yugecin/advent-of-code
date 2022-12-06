@@ -1,12 +1,7 @@
 section .text
-; If not using this name, my link.exe gives an unsuppressible warning that
-; "entrypoint is not __stdcall with 12 bytes of args".
-global __DllMainCRTStartup@12
-__DllMainCRTStartup@12:
-	mov eax, 1
-	retn 0Ch
+%define TYPE 32
+%include "common.asm"
 
-global aoc
 aoc:
 	push esi
 
@@ -22,7 +17,6 @@ aoc:
 	jmp @next
 
 @end:
-	xor edx, edx ; 64bit return value
 	pop esi
 	ret
 

@@ -1,52 +1,51 @@
-Setting environment for using Microsoft Visual Studio 2005 x86 tools.
 ======= day01a.asm
-   Creating library ../aoc.lib and object ../aoc.exp
-71471 avg 7ticks/715ns lo 7/700ns hi 20/2000ns timer resolution 100ns
+   Creating library aoc.lib and object aoc.exp
+71471 avg 7ticks/686ns lo 6/600ns hi 11/1100ns timer resolution 100ns
 ======= day01b.asm
-   Creating library ../aoc.lib and object ../aoc.exp
-211189 avg 7ticks/724ns lo 7/700ns hi 23/2300ns timer resolution 100ns
+   Creating library aoc.lib and object aoc.exp
+211189 avg 8ticks/755ns lo 7/700ns hi 20/2000ns timer resolution 100ns
 ======= day02a.asm
-   Creating library ../aoc.lib and object ../aoc.exp
-12679 avg 38ticks/3827ns lo 38/3800ns hi 79/7900ns timer resolution 100ns
+   Creating library aoc.lib and object aoc.exp
+12679 avg 38ticks/3804ns lo 37/3700ns hi 49/4900ns timer resolution 100ns
 ======= day02b.asm
-   Creating library ../aoc.lib and object ../aoc.exp
-14470 avg 38ticks/3847ns lo 38/3800ns hi 85/8500ns timer resolution 100ns
+   Creating library aoc.lib and object aoc.exp
+14470 avg 38ticks/3826ns lo 38/3800ns hi 51/5100ns timer resolution 100ns
 ======= day02-faster-a.asm
-   Creating library ../aoc.lib and object ../aoc.exp
-12679 17ticks/1700ns timer resolution 100ns
+   Creating library aoc.lib and object aoc.exp
+12679 avg 7ticks/735ns lo 6/600ns hi 8/800ns timer resolution 100ns
 ======= day02-faster-b.asm
-   Creating library ../aoc.lib and object ../aoc.exp
-14470 avg 11ticks/1054ns lo 5/500ns hi 55/5500ns timer resolution 100ns
+   Creating library aoc.lib and object aoc.exp
+14470 avg 7ticks/735ns lo 6/600ns hi 8/800ns timer resolution 100ns
 ======= day03a.asm
-   Creating library ../aoc.lib and object ../aoc.exp
-7746 avg 90ticks/9001ns lo 86/8600ns hi 147/14700ns timer resolution 100ns
+   Creating library aoc.lib and object aoc.exp
+7746 avg 89ticks/8879ns lo 87/8700ns hi 231/23100ns timer resolution 100ns
 ======= day03b.asm
-   Creating library ../aoc.lib and object ../aoc.exp
-2604 avg 102ticks/10201ns lo 95/9500ns hi 212/21200ns timer resolution 100ns
+   Creating library aoc.lib and object aoc.exp
+2604 avg 77ticks/7730ns lo 76/7600ns hi 119/11900ns timer resolution 100ns
 ======= day04a.asm
-   Creating library ../aoc.lib and object ../aoc.exp
-540 avg 10ticks/966ns lo 9/900ns hi 26/2600ns timer resolution 100ns
+   Creating library aoc.lib and object aoc.exp
+540 avg 10ticks/952ns lo 9/900ns hi 10/1000ns timer resolution 100ns
 ======= day04b.asm
-   Creating library ../aoc.lib and object ../aoc.exp
-872 avg 7ticks/714ns lo 7/700ns hi 19/1900ns timer resolution 100ns
+   Creating library aoc.lib and object aoc.exp
+872 avg 7ticks/696ns lo 6/600ns hi 8/800ns timer resolution 100ns
 ======= day04b-xmm.asm
-   Creating library ../aoc.lib and object ../aoc.exp
-872 avg 10ticks/1029ns lo 10/1000ns hi 62/6200ns timer resolution 100ns
+   Creating library aoc.lib and object aoc.exp
+872 avg 10ticks/1003ns lo 10/1000ns hi 11/1100ns timer resolution 100ns
 ======= day05a.asm
-   Creating library ../aoc.lib and object ../aoc.exp
--1 avg 63ticks/6251ns lo 54/5400ns hi 88/8800ns timer resolution 100ns
+   Creating library aoc.lib and object aoc.exp
+TLFGBZHCN avg 73ticks/7325ns lo 68/6800ns hi 198/19800ns timer resolution 100ns
 ======= day05b.asm
-   Creating library ../aoc.lib and object ../aoc.exp
--1 avg 49ticks/4929ns lo 41/4100ns hi 391/39100ns timer resolution 100ns
+   Creating library aoc.lib and object aoc.exp
+QRQFHFWCL avg 38ticks/3764ns lo 37/3700ns hi 103/10300ns timer resolution 100ns
 ======= day05-preparsed-a.asm
-   Creating library ../aoc.lib and object ../aoc.exp
--1 avg 71ticks/7112ns lo 60/6000ns hi 210/21000ns timer resolution 100ns
+   Creating library aoc.lib and object aoc.exp
+TLFGBZHCN avg 71ticks/7098ns lo 66/6600ns hi 113/11300ns timer resolution 100ns
 ======= day05-preparsed-b.asm
-   Creating library ../aoc.lib and object ../aoc.exp
--1 avg 37ticks/3653ns lo 35/3500ns hi 206/20600ns timer resolution 100ns
+   Creating library aoc.lib and object aoc.exp
+QRQFHFWCL avg 36ticks/3562ns lo 35/3500ns hi 86/8600ns timer resolution 100ns
 ======= day06a.asm
-   Creating library ../aoc.lib and object ../aoc.exp
-1109 avg 8ticks/791ns lo 7/700ns hi 29/2900ns timer resolution 100ns
+   Creating library aoc.lib and object aoc.exp
+1109 avg 8ticks/769ns lo 7/700ns hi 15/1500ns timer resolution 100ns
 ======= day06b.asm
-   Creating library ../aoc.lib and object ../aoc.exp
-3965 avg 29ticks/2931ns lo 28/2800ns hi 92/9200ns timer resolution 100ns
+   Creating library aoc.lib and object aoc.exp
+3965 avg 28ticks/2755ns lo 26/2600ns hi 83/8300ns timer resolution 100ns

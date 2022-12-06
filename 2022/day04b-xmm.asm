@@ -1,5 +1,6 @@
 section .text
-%include "dllentry.asm"
+%define TYPE 32
+%include "common.asm"
 
 ;punpckhqd: 1 2 3 4 -> 3 3 4 4
 ;punpckhqdq: 1 2 3 4 -> 3 4 3 4
@@ -43,7 +44,6 @@ doline:
 @end:
 	add esp, 4 ; // since we are in the 'doline' func, pop its return address
 	mov eax, edi
-	xor edx, edx ; 64bit return value
 	pop edi
 	pop esi
 	ret

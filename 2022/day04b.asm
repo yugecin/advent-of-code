@@ -1,5 +1,6 @@
 section .text
-%include "dllentry.asm"
+%define TYPE 32
+%include "common.asm"
 
 global aoc
 aoc:
@@ -27,7 +28,6 @@ aoc:
 
 @end:
 	mov eax, edi
-	xor edx, edx ; 64bit return value
 	pop edi
 	pop esi
 	ret

@@ -1,8 +1,8 @@
 section .text
-%include "dllentry.asm"
+%define TYPE 0
+%include "common.asm"
 
 %define NUMSTACKS 9
-global aoc
 aoc:
 	push edi
 	push esi
@@ -102,9 +102,9 @@ aoc:
 @emptystack:
 	add edx, 64
 	loop @addnext
+	mov byte [edi], 0
 
-	mov eax, 0FFFFFFFFh
-	mov edx, 0FFFFFFFFh
+	mov eax, msg
 	pop ebx
 	pop esi
 	pop edi

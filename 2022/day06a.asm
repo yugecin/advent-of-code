@@ -1,7 +1,7 @@
 section .text
-%include "dllentry.asm"
+%define TYPE 32
+%include "common.asm"
 
-global aoc
 aoc:
 	push edi
 	push ebx
@@ -31,7 +31,6 @@ aoc:
 	jmp @neeeext
 
 @end:
-	xor edx, edx
 	pop ebx
 	pop edi
 	ret
