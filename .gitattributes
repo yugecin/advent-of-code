@@ -1,0 +1,2 @@
+*.asm linguist-language=asm
+*input.asm linguist-vendored
