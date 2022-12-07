@@ -256,4 +256,5 @@ section .bss
 	current_path_data resb 256
 	num_nodes resd 1
 	nodes resb 1000*256 ; size(4), is dir(1), path length(1), path levels(1), path(249)
-%include "day07input.txt"
+
+%include "day07input.asm"

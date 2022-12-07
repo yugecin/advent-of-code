@@ -107,4 +107,4 @@ aoc:
 	pop edi
 	ret
 
-%include "day05input.txt"
+%include "day05input.asm"

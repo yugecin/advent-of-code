@@ -50,4 +50,4 @@ doline:
 
 section .rodata
 	align 16
-%include "day04input.txt"
+%include "day04input.asm"

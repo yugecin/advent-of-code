@@ -34,4 +34,4 @@ aoc:
 	ret
 
 section .rodata
-%include "day04input.txt"
+%include "day04input.asm"
