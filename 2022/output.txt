@@ -49,3 +49,6 @@ QRQFHFWCL avg 36ticks/3562ns lo 35/3500ns hi 86/8600ns timer resolution 100ns
 ======= day06b.asm
    Creating library aoc.lib and object aoc.exp
 3965 avg 28ticks/2755ns lo 26/2600ns hi 83/8300ns timer resolution 100ns
+======= day07a.asm
+   Creating library aoc.lib and object aoc.exp
+1490523 avg 1361ticks/136095ns lo 1317/131700ns hi 2074/207400ns timer resolution 100ns
