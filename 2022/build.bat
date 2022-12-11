@@ -37,7 +37,7 @@ GOTO:EOF
 :RUN
 ECHO ======= %1
 NASM -f win32 %1 -o aoc.obj || GOTO:EOF
-LINK /NOLOGO /DLL /EXPORT:aoc /EXPORT:type aoc.obj /OUT:aoc.dll || GOTO:EOF
+LINK /NOLOGO /DLL /EXPORT:aoc /EXPORT:type /EXPORT:get64ops aoc.obj /OUT:aoc.dll || GOTO:EOF
 aoc2022.exe %2
 GOTO:EOF
 

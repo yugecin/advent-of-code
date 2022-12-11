@@ -1,10 +1,24 @@
 #include <stdio.h>
 #include <windows.h>
 
+long long int div64(long long int n, int long long d)
+{
+	return n / d;
+}
+long long int mul64(long long int a, int long long b)
+{
+	return a * b;
+}
+long long int mod64(long long int a, int long long b)
+{
+	return a % b;
+}
+
 int main(int argc, char **argv)
 {
 	static char buf[1000];
 	unsigned int debug, bench, iterations, i, zzz, min, max, total, nanos_per_tick, t;
+	void (*get64ops)(void *div64, void *mul64, void *mod64);
 	LARGE_INTEGER start, end, freq;
 	long long int (*aoc)(void);
 	int (*type)(void);
@@ -28,6 +42,13 @@ int main(int argc, char **argv)
 		printf("couldn't load aoc.dll, error: %ld\n", GetLastError());
 		return 1;
 	}
+	proc = GetProcAddress(lib, "get64ops");
+	if (!proc) {
+		printf("did not find proc 'get64ops'\n");
+		return 3;
+	}
+	get64ops = (void*) proc;
+	get64ops(div64, mul64, mod64);
 	proc = GetProcAddress(lib, "aoc");
 	if (!proc) {
 		printf("did not find proc 'aoc'\n");
