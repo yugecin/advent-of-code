@@ -159,7 +159,7 @@ throwitem: ; (target, value:eax, value:edx)
 	pop ebp
 	ret 12
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
-monkeh__op_mul: ; (value:eax, value:edx, arg)
+op_mul: ; (value:eax, value:edx, arg)
 	mov eax, [esp+4]
 	mov edx, [esp+8]
 	push 0
@@ -169,7 +169,7 @@ monkeh__op_mul: ; (value:eax, value:edx, arg)
 	call [mul64]
 	add esp, 16
 	ret 12
-monkeh__op_square: ; (value:eax, value:edx, arg)
+op_square: ; (value:eax, value:edx, arg)
 	mov edx, [esp+8]
 	mov eax, [esp+4]
 	push edx
@@ -179,7 +179,7 @@ monkeh__op_square: ; (value:eax, value:edx, arg)
 	call [mul64]
 	add esp, 16
 	ret 12
-monkeh__op_plus: ; (value:eax, value:edx, arg)
+op_plus: ; (value:eax, value:edx, arg)
 	mov eax, [esp+4]
 	mov edx, [esp+8]
 	add eax, [esp+12]
