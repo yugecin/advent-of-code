@@ -1,3 +1,12 @@
+testinput db \
+	"two1nine",0,\
+	"eightwothree",0,\
+	"abcone2threexyz",0,\
+	"xtwone3four",0,\
+	"4nineeightseven2",0,\
+	"zoneight234",0,\
+	"7pqrstsixteen",0,\
+	0
 input db \
 	"sixrrmlkptmc18zhvninek",0,\
 	"jcb82eightwond",0,\

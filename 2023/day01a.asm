@@ -36,7 +36,7 @@ aoc:
 @nah:
 	inc esi
 	jmp @n
-	
+
 @end:
 	pop esi
 	pop edx
