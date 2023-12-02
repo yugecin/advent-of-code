@@ -6,7 +6,7 @@ testinput db \
 	"4nineeightseven2",0,\
 	"zoneight234",0,\
 	"7pqrstsixteen",0,\
-	0
+	0,0,0,0,0,0
 input db \
 	"sixrrmlkptmc18zhvninek",0,\
 	"jcb82eightwond",0,\
@@ -1008,4 +1008,4 @@ input db \
 	"3two5lbrb43nine7",0,\
 	"foursix5eightfivezvnbsevenjcrzhxdzfb2",0,\
 	"jmgnfive7ffglffpjlvbtvl935zz",0,\
-	0
+	0,0,0,0,0,0
