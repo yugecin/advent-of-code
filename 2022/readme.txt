@@ -4,7 +4,6 @@ my solutions for the 2022 Advent of Code: https://adventofcode.com/2022
 
 nasm: NASM version 2.15.05 compiled on Aug 28 2020
 link: Microsoft (R) Incremental Linker Version 8.00.50727.42 (from VC2005)
-(VCS2015 to compile aoc2021.cs)
 debugger: IDA freeware and/or CheatEngine
 
 run "build.bat" and it compiles and spouts all solutions
