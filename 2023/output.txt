@@ -18,3 +18,7 @@ RESULT: 527364
 PROGRAM: day03b.asm
 TIMING: AVG: 212ticks/21191ns LO: 196/19600ns HI: 333/33300ns RES 100ns
 RESULT: 79026871
+================================================================================
+PROGRAM: day04a.asm
+TIMING: AVG: 157ticks/15691ns LO: 141/14100ns HI: 356/35600ns RES 100ns
+RESULT: 25571
