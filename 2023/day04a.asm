@@ -59,7 +59,8 @@ aoc:
 	test byte [table+eax], 1
 	jz .notwinning
 	shl ebx, 1
-	setz bl
+	setz cl
+	or bl, cl
 .notwinning:
 	add esi, 3
 	jmp .afterpipe.loop
