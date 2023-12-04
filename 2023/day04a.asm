@@ -2,8 +2,8 @@ section .text
 %define TYPE 32
 %include "common.asm"
 
-%define INPUT testinput
-;%define INPUT input
+;%define INPUT testinput
+%define INPUT input
 
 aoc:
 	push ebp
