@@ -4,7 +4,11 @@ my solutions for the 2023 Advent of Code: https://adventofcode.com/2023
 
 nasm: NASM version 2.15.05 compiled on Aug 28 2020
 link: Microsoft (R) Incremental Linker Version 8.00.50727.42 (from VC2005)
+gcc: gcc version 8.3.0 (i686-posix-dwarf, Built by strawberryperl.com project)
 debugger: IDA freeware and/or CheatEngine
+
+aoc2023.exe is built with:
+gcc -Wall -fno-strict-aliasing -x c aoc2023.c -o aoc2023.exe
 
 run "build.bat" and it compiles and spouts all solutions
 
