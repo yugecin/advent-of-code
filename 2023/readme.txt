@@ -19,3 +19,6 @@ to get an average timing over 500 iterations.
 differences from 2022:
 
 output formatting bullshit :)
+
+aoc.dll must now also export 'getprintf',
+this is a __cdecl function that accepts 1 arguments: a ptr to printf :)
