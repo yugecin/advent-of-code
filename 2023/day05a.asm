@@ -146,7 +146,7 @@ aoc:
 @end:
 	; returning 64 bit number because we're maybe breaking the signed 32 bit barrier
 	xor edx, edx
-	mov edi, eax
+	mov eax, edi
 	pop ebp
 	pop edi
 	pop esi
