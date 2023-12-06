@@ -17,6 +17,19 @@ get64ops:
 	ret
 %endif
 
+%ifdef REQUIRE_PRINTF
+section .bss
+	printf resd 1
+section .text
+getprintf:
+	mov eax, [esp+4]
+	mov [printf], eax
+	ret
+%else
+getprintf:
+	ret
+%endif
+
 ; see https://learn.microsoft.com/en-us/cpp/build/reference/entry-entry-point-symbol?view=msvc-170
 ; @12 because 3 arguments, dunno why the extra underscore
 global __DllMainCRTStartup@12
@@ -33,4 +46,4 @@ type:
 	mov eax, TYPE
 	ret
 
-global type, aoc, get64ops
+global type, aoc, get64ops, getprintf

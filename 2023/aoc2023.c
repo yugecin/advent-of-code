@@ -19,6 +19,7 @@ int main(int argc, char **argv)
 	static char buf[1000];
 	unsigned int debug, bench, iterations, i, zzz, min, max, total, nanos_per_tick, t;
 	void (*get64ops)(void *div64, void *mul64, void *mod64);
+	void (*getprintf)(void *printf);
 	LARGE_INTEGER start, end, freq;
 	long long int (*aoc)(void);
 	int (*type)(void);
@@ -49,6 +50,11 @@ int main(int argc, char **argv)
 	}
 	get64ops = (void*) proc;
 	get64ops(div64, mul64, mod64);
+	proc = GetProcAddress(lib, "getprintf");
+	if (proc) {
+		getprintf = (void*) proc;
+		getprintf(printf);
+	}
 	proc = GetProcAddress(lib, "aoc");
 	if (!proc) {
 		printf("did not find proc 'aoc'\n");

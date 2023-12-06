@@ -1,5 +1,6 @@
 section .text
 %define TYPE 64
+%define REQUIRE_PRINTF
 %include "common.asm"
 
 ;%define INPUT testinput
@@ -90,20 +91,46 @@ aoc:
 	; kk we have seed in eax
 	inc esi ; put this correct for next seed number
 		; find the fucker's location
+			%define PRINTF_A "seed"
+			%define PRINTF_B "> %lld"
+			pushad
+			push printf_a
+			call [printf]
+			add esp, 4
+			popad
+			jmp @aaaaa
+			printeax:
+				pushad
+				push 0
+				push eax
+				push printf_b
+				call [printf]
+				add esp, 12
+				popad
+			ret
+			@aaaaa:
+			call printeax
 		xor edx, edx ; map idx
 		call mapit
+			call printeax
 		inc edx
 		call mapit
+			call printeax
 		inc edx
 		call mapit
+			call printeax
 		inc edx
 		call mapit
+			call printeax
 		inc edx
 		call mapit
+			call printeax
 		inc edx
 		call mapit
+			call printeax
 		inc edx
 		call mapit
+			call printeax
 		; save location in result if lower than prev
 		cmp eax, edi
 		cmovb edi, eax
@@ -117,7 +144,7 @@ aoc:
 	jmp @parse_seed_number
 
 @end:
-	; returning 64 bit number because we're breaking the signed 32 bit barrier
+	; returning 64 bit number because we're maybe breaking the signed 32 bit barrier
 	xor edx, edx
 	mov edi, eax
 	pop ebp
@@ -187,4 +214,6 @@ section .bss
 	num_map_entries resd NUM_MAPS
 	maps resb entry_size*MAX_MAP_ENTRIES*NUM_MAPS
 section .rodata
+	printf_a db PRINTF_A,10,0
+	printf_b db PRINTF_B,10,0
 %include "day05input.asm"

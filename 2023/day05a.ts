@@ -4,7 +4,9 @@ const main = (input: string) => {
 	const blocks = input.split('\n\n');
 	const maps = blocks.slice(1).map(m => m.split('\n').slice(1).map(l => l.split(' ').map(n => parseInt(n))));
 	const seed2loc = (strnum: string) => {
-		return maps.reduce((a, c) => {
+		console.log('newseed');
+		const res = maps.reduce((a, c) => {
+			console.log(`> ${a}`);
 			for (const m of c) {
 				if (m[1] <= a && a < m[1] + m[2]) {
 					return a - m[1] + m[0];
@@ -12,6 +14,8 @@ const main = (input: string) => {
 			}
 			return a;
 		}, parseInt(strnum));
+		console.log(`> ${res}`);
+		return res;
 	};
 	console.log(blocks[0].substring(7).split(' ').map(seed2loc).reduce((a, c) => Math.min(a, c), 9e9));
 };

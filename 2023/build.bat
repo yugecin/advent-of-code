@@ -21,7 +21,7 @@ GOTO:EOF
 ECHO ================================================================================
 ECHO PROGRAM: %1
 NASM -f win32 %1 -o aoc.obj || GOTO:EOF
-LINK /NOLOGO /DLL /EXPORT:aoc /EXPORT:type /EXPORT:get64ops aoc.obj /OUT:aoc.dll > linkoutput.txt || GOTO:LINKERR
+LINK /NOLOGO /DLL /EXPORT:aoc /EXPORT:type /EXPORT:get64ops /EXPORT:getprintf aoc.obj /OUT:aoc.dll > linkoutput.txt || GOTO:LINKERR
 DEL linkoutput.txt
 aoc2023.exe %2
 GOTO:EOF
