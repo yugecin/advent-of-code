@@ -2,3 +2,7 @@
 PROGRAM: day02a.asm
 TIMING: AVG: 70ticks/7030ns LO: 68/6800ns HI: 308/30800ns RES 100ns
 RESULT: 564
+================================================================================
+PROGRAM: day03a.asm
+TIMING: AVG: 83ticks/8327ns LO: 82/8200ns HI: 131/13100ns RES 100ns
+RESULT: 170807108
