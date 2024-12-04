@@ -10,28 +10,33 @@ debugger: IDA freeware and/or CheatEngine
 aoc2022.exe is built with:
 gcc -Wall -fno-strict-aliasing -x c aoc2022.c -o aoc2022.exe
 
-run "build.bat" and it compiles and spouts all solutions
+================================================================================
+
+aoc2022.exe loads aoc.dll and calls exported function "aoc" between calling
+QueryPerformanceCounter to time the duration, at least two times (to check if the
+result doesn't change), and optionally 500 times to get average/high/low timings.
+
+aoc.dll requirements:
+- export a function named "aoc" that takes no arguments and returns the result
+- export a function named "type" that takes no arguments and returns:
+  - 0 to interpret the result of "aoc" as a 0 terminated string
+  - 32 to interpret the result of "aoc" as a 32 bit int
+  - 64 to interpret the result of "aoc" as a 64 bit int
+- export a function named "get64ops" that takes 3 arguments (__cdecl):
+  - a pointer to a 64 bit division function
+  - a pointer to a 64 bit multiplication function
+  - a pointer to a 64 bit modulo function
+  these functions have a signature of:
+    'long long int __cdecl xxx(long long int a, long long int b)'
+  this function will be called before calling "aoc"
+
+================================================================================
+
+build.bat is a small script that compiles each file (defined inside the script)
+into aoc.dll and invokes aoc2022.exe
 
 run "build.bat /DEBUG" to make aoc2022.exe wait before running each solution,
 this is useful to attach a debugger to the waiting process to debug the dll.
 
 run "build.bat /BENCH" to make aoc2022.exe run the solutions multiple times,
 to get an average timing over 500 iterations.
-
-================================================================================
-
-differences from 2021:
-
-aoc.dll must export 'aoc', as previous, but also 'type'
-the 'type' function must return 0, 32 or 64:
-- 0 means the result of 'aoc' is a 0 terminated string
-- 32 means the result of 'aoc' is a 32 bit int
-- 64 means the result of 'aoc' is a 64 bit int
-
-aoc.dll must also export 'get64ops',
-this is a __cdecl function that accepts 3 arguments:
-- a pointer to a 64 bit division function
-- a pointer to a 64 bit multiplication function
-- a pointer to a 64 bit modulo function
-these functions have a signature of:
-'long long int xxx(long long int a, long long int b)'
