@@ -12,22 +12,22 @@ aoc:
 	mov ebx, [esi]
 	test ebx, ebx
 	jz @end
-	cmp ebx, 0x276E6F64
+	cmp ebx, "don'"
 	jnz @nodon
 	add esi, 3
-	cmp dword [esi], 0x29287427
+	cmp dword [esi], "'t()"
 	jnz @continue
 @nodo:
 	inc esi
 	mov ebx, [esi]
 	test ebx, ebx
 	jz @end
-	cmp ebx, 0x29286F64
+	cmp ebx, "do()"
 	jne @nodo
 	add esi, 4
 	jmp @continue
 @nodon:
-	cmp ebx, 0x286C756D
+	cmp ebx, "mul("
 	jz @mul
 	inc esi
 	jmp @continue

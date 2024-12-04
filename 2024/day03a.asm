@@ -12,7 +12,7 @@ aoc:
 	mov ebx, [esi]
 	test ebx, ebx
 	jz @end
-	cmp ebx, 0x286C756D
+	cmp ebx, "mul("
 	jz @mul
 	inc esi
 	jmp @continue
