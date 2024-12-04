@@ -105,23 +105,26 @@ check_mas: ;(dx,dy)
 	add [esp+4], esi ; y
 	call get_cell
 	cmp al, 'M'
-	jne .ret
+	sete bl
 	add [esp+0], edi ; x
 	add [esp+4], esi ; y
 	call get_cell
 	cmp al, 'A'
-	jne .ret
+	sete bh
+	shl ebx, 16
 	add [esp+0], edi ; x
 	add [esp+4], esi ; y
 	call get_cell
 	cmp al, 'S'
-	jne .ret
-	inc ebp
-	.ret:
-		add esp, 8
-		pop esi
-		pop edi
-		ret
+	sete bl
+	xor eax, eax
+	cmp ebx, 0x01010001
+	sete al
+	add ebp, eax
+	add esp, 8
+	pop esi
+	pop edi
+	ret
 
 get_cell: ;(x,y)
 	mov eax, [esp+8] ; y
