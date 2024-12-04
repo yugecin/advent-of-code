@@ -7,7 +7,6 @@ struc gridwalker
 	.rows: resd 1
 	.posx: resd 1
 	.posy: resd 1
-	.occurences: resd 1
 	.SIZE: resd 0
 endstruc
 
@@ -131,7 +130,6 @@ gw:
 		at gridwalker.rows, dd 0
 		at gridwalker.posx, dd 0
 		at gridwalker.posy, dd 0
-		at gridwalker.occurences, dd 0
 	iend
 section .rodata
 %include "day04input.asm"
