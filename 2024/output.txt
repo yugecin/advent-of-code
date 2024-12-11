@@ -30,3 +30,7 @@ RESULT: 4711
 PROGRAM: day06b.asm
 TIMING: AVG: 428397ticks/42839703ns LO: 405282/40528200ns HI: 478385/47838500ns RES 100ns
 RESULT: 1562
+================================================================================
+PROGRAM: day08a.asm
+TIMING: AVG: 23ticks/2328ns LO: 22/2200ns HI: 62/6200ns RES 100ns
+RESULT: 285
