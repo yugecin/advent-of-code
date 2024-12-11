@@ -34,3 +34,7 @@ RESULT: 1562
 PROGRAM: day08a.asm
 TIMING: AVG: 23ticks/2328ns LO: 22/2200ns HI: 62/6200ns RES 100ns
 RESULT: 285
+================================================================================
+PROGRAM: day08b.asm
+TIMING: AVG: 62ticks/6184ns LO: 48/4800ns HI: 361/36100ns RES 100ns
+RESULT: 944

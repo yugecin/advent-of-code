@@ -17,6 +17,7 @@ CALL :RUN day05a.asm %1 || GOTO:ERR
 CALL :RUN day06a.asm %1 || GOTO:ERR
 CALL :RUN day06b.asm %1 || GOTO:ERR
 CALL :RUN day08a.asm %1 || GOTO:ERR
+CALL :RUN day08b.asm %1 || GOTO:ERR
 GOTO:EOF
 
 :RUN
