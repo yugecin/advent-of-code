@@ -27,9 +27,6 @@ collect_character_locations:
 	push edi
 
 	xor eax, eax
-	mov edi, antinode
-	mov ecx, GRIDSIZE*GRIDSIZE/4
-	rep stosd
 	mov edi, numcharacterlocations
 	mov ecx, 128/4
 	rep stosd
@@ -150,6 +147,11 @@ add_antinodes_for_all_character_pairs: ; (character)
 aoc:
 	mov dword [numantinodes], 0
 	call collect_character_locations
+
+	xor eax, eax
+	mov edi, antinode
+	mov ecx, GRIDSIZE*GRIDSIZE/4
+	rep stosd
 
 	push ebp
 	sub esp, 4
