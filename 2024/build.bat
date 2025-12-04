@@ -1,4 +1,4 @@
-:: any given first argument will be passed to aoc2024.exe, usually /BENCH or /DEBUG, see aoc2024.c for details
+:: any given first argument will be passed to ../2023/aoc2023.exe, usually /BENCH or /DEBUG, see ../2023/aoc2023.c for details
 @ECHO OFF
 REM don't call vcvars32 if it was already called in this session
 REM otherwise it will error eventually because of too long input lines (because it appends to PATH)
