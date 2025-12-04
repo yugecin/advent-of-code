@@ -8,7 +8,7 @@ REM my vcvars returns errorlevel 9009 (attempted to execute a non-existing comma
 ::IF %ERRORLEVEL% NEQ 0 GOTO:ERR
 
 :SKIPVCVARS
-ECHO nothing here yet
+CALL :RUN day01a.asm %1 || GOTO:ERR
 GOTO:EOF
 
 :RUN
